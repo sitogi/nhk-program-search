@@ -25,60 +25,222 @@
       "title": "Area",
       "description": "Select Area",
       "data": [
-        { "title": "札幌", "value": "010" },
-        { "title": "函館", "value": "011" },
-        { "title": "旭川", "value": "012" },
-        { "title": "帯広", "value": "013" },
-        { "title": "釧路", "value": "014" },
-        { "title": "北見", "value": "015" },
-        { "title": "室蘭", "value": "016" },
-        { "title": "青森", "value": "020" },
-        { "title": "盛岡", "value": "030" },
-        { "title": "仙台", "value": "040" },
-        { "title": "秋田", "value": "050" },
-        { "title": "山形", "value": "060" },
-        { "title": "福島", "value": "070" },
-        { "title": "水戸", "value": "080" },
-        { "title": "宇都宮", "value": "090" },
-        { "title": "前橋", "value": "100" },
-        { "title": "さいたま", "value": "110" },
-        { "title": "千葉", "value": "120" },
-        { "title": "東京", "value": "130" },
-        { "title": "横浜", "value": "140" },
-        { "title": "新潟", "value": "150" },
-        { "title": "富山", "value": "160" },
-        { "title": "金沢", "value": "170" },
-        { "title": "福井", "value": "180" },
-        { "title": "甲府", "value": "190" },
-        { "title": "長野", "value": "200" },
-        { "title": "岐阜", "value": "210" },
-        { "title": "静岡", "value": "220" },
-        { "title": "名古屋", "value": "230" },
-        { "title": "津", "value": "240" },
-        { "title": "大津", "value": "250" },
-        { "title": "京都", "value": "260" },
-        { "title": "大阪", "value": "270" },
-        { "title": "神戸", "value": "280" },
-        { "title": "奈良", "value": "290" },
-        { "title": "和歌山", "value": "300" },
-        { "title": "鳥取", "value": "310" },
-        { "title": "松江", "value": "320" },
-        { "title": "岡山", "value": "330" },
-        { "title": "広島", "value": "340" },
-        { "title": "山口", "value": "350" },
-        { "title": "徳島", "value": "360" },
-        { "title": "高松", "value": "370" },
-        { "title": "松山", "value": "380" },
-        { "title": "高知", "value": "390" },
-        { "title": "福岡", "value": "400" },
-        { "title": "北九州", "value": "401" },
-        { "title": "佐賀", "value": "410" },
-        { "title": "長崎", "value": "420" },
-        { "title": "熊本", "value": "430" },
-        { "title": "大分", "value": "440" },
-        { "title": "宮崎", "value": "450" },
-        { "title": "鹿児島", "value": "460" },
-        { "title": "沖縄", "value": "470" }
+        {
+          "title": "札幌",
+          "value": "010"
+        },
+        {
+          "title": "函館",
+          "value": "011"
+        },
+        {
+          "title": "旭川",
+          "value": "012"
+        },
+        {
+          "title": "帯広",
+          "value": "013"
+        },
+        {
+          "title": "釧路",
+          "value": "014"
+        },
+        {
+          "title": "北見",
+          "value": "015"
+        },
+        {
+          "title": "室蘭",
+          "value": "016"
+        },
+        {
+          "title": "青森",
+          "value": "020"
+        },
+        {
+          "title": "盛岡",
+          "value": "030"
+        },
+        {
+          "title": "仙台",
+          "value": "040"
+        },
+        {
+          "title": "秋田",
+          "value": "050"
+        },
+        {
+          "title": "山形",
+          "value": "060"
+        },
+        {
+          "title": "福島",
+          "value": "070"
+        },
+        {
+          "title": "水戸",
+          "value": "080"
+        },
+        {
+          "title": "宇都宮",
+          "value": "090"
+        },
+        {
+          "title": "前橋",
+          "value": "100"
+        },
+        {
+          "title": "さいたま",
+          "value": "110"
+        },
+        {
+          "title": "千葉",
+          "value": "120"
+        },
+        {
+          "title": "東京",
+          "value": "130"
+        },
+        {
+          "title": "横浜",
+          "value": "140"
+        },
+        {
+          "title": "新潟",
+          "value": "150"
+        },
+        {
+          "title": "富山",
+          "value": "160"
+        },
+        {
+          "title": "金沢",
+          "value": "170"
+        },
+        {
+          "title": "福井",
+          "value": "180"
+        },
+        {
+          "title": "甲府",
+          "value": "190"
+        },
+        {
+          "title": "長野",
+          "value": "200"
+        },
+        {
+          "title": "岐阜",
+          "value": "210"
+        },
+        {
+          "title": "静岡",
+          "value": "220"
+        },
+        {
+          "title": "名古屋",
+          "value": "230"
+        },
+        {
+          "title": "津",
+          "value": "240"
+        },
+        {
+          "title": "大津",
+          "value": "250"
+        },
+        {
+          "title": "京都",
+          "value": "260"
+        },
+        {
+          "title": "大阪",
+          "value": "270"
+        },
+        {
+          "title": "神戸",
+          "value": "280"
+        },
+        {
+          "title": "奈良",
+          "value": "290"
+        },
+        {
+          "title": "和歌山",
+          "value": "300"
+        },
+        {
+          "title": "鳥取",
+          "value": "310"
+        },
+        {
+          "title": "松江",
+          "value": "320"
+        },
+        {
+          "title": "岡山",
+          "value": "330"
+        },
+        {
+          "title": "広島",
+          "value": "340"
+        },
+        {
+          "title": "山口",
+          "value": "350"
+        },
+        {
+          "title": "徳島",
+          "value": "360"
+        },
+        {
+          "title": "高松",
+          "value": "370"
+        },
+        {
+          "title": "松山",
+          "value": "380"
+        },
+        {
+          "title": "高知",
+          "value": "390"
+        },
+        {
+          "title": "福岡",
+          "value": "400"
+        },
+        {
+          "title": "北九州",
+          "value": "401"
+        },
+        {
+          "title": "佐賀",
+          "value": "410"
+        },
+        {
+          "title": "長崎",
+          "value": "420"
+        },
+        {
+          "title": "熊本",
+          "value": "430"
+        },
+        {
+          "title": "大分",
+          "value": "440"
+        },
+        {
+          "title": "宮崎",
+          "value": "450"
+        },
+        {
+          "title": "鹿児島",
+          "value": "460"
+        },
+        {
+          "title": "沖縄",
+          "value": "470"
+        }
       ]
     }
   ],
@@ -91,7 +253,9 @@
     }
   ],
   "dependencies": {
-    "@raycast/api": "^1.72.1"
+    "@raycast/api": "^1.72.1",
+    "node-fetch": "^3.3.2",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "@raycast/eslint-config": "^1.0.6",
