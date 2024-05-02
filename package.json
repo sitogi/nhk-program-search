@@ -1,9 +1,9 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "nhk-program-search",
-  "title": "nhk-program-search",
+  "title": "NHK",
   "description": "NHK Program Search",
-  "icon": "command-icon.png",
+  "icon": "nhk-logo.png",
   "author": "sitogi",
   "owner": "t-motors",
   "categories": [
@@ -12,9 +12,9 @@
   "license": "MIT",
   "commands": [
     {
-      "name": "nhk-program-search",
-      "title": "NHK Program Search",
-      "description": "",
+      "name": "program-list",
+      "title": "Program List",
+      "description": "MHK Program List API Wrapper",
       "mode": "view"
     }
   ],
