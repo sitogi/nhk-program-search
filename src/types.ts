@@ -1,15 +1,28 @@
-type Logo = {
+export const serviceIds = [
+  "g1",
+  // "g2",
+  "e1",
+  // "e2",
+  // "e3",
+  "s1",
+  "s2",
+  "s5",
+  "s6",
+] as const;
+export type ServiceId = (typeof serviceIds)[number];
+
+type ServiceLogo = {
   url: string;
   width: string;
   height: string;
 };
 
 type Service = {
-  id: string;
+  id: ServiceId;
   name: string;
-  logo_s: Logo;
-  logo_m: Logo;
-  logo_l: Logo;
+  logo_s: ServiceLogo;
+  logo_m: ServiceLogo;
+  logo_l: ServiceLogo;
 };
 
 type Area = {
@@ -17,7 +30,7 @@ type Area = {
   name: string;
 };
 
-type Event = {
+export type Program = {
   id: string;
   event_id: string;
   start_time: string;
@@ -31,10 +44,10 @@ type Event = {
   genres: string[];
 };
 
-type EventGroup = {
-  g1: Event[];
+type ServicePrograms = {
+  [key in ServiceId]: Program[];
 };
 
-export type Program = {
-  list: EventGroup;
+export type TVSchedule = {
+  list: ServicePrograms;
 };
