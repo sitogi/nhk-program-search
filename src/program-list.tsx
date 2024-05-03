@@ -98,12 +98,8 @@ function ProgramDetail({ program }: { program: Program }): React.JSX.Element {
           />
           <Detail.Metadata.Separator />
           <Detail.Metadata.Label
-            title="Start Time"
-            text={getFormattedDate(new Date(program.start_time), "YYYY-MM-DD HH:mm")}
-          />
-          <Detail.Metadata.Label
-            title="End Time"
-            text={getFormattedDate(new Date(program.end_time), "YYYY-MM-DD HH:mm")}
+            title="Airtime"
+            text={`${getFormattedDate(new Date(program.start_time), "HH:mm")} - ${getFormattedDate(new Date(program.end_time), "HH:mm")}`}
           />
           <Detail.Metadata.Separator />
           <Detail.Metadata.TagList title="Genres">
