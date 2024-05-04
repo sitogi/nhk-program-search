@@ -3,7 +3,7 @@ import { getFormattedDate } from "./utils";
 import fetch from "node-fetch";
 import useSWR from "swr";
 import { Action, ActionPanel, Detail, Icon, List } from "@raycast/api";
-import { Program, ServiceId, serviceIds, TVSchedule } from "./types";
+import { genreLabels, Program, ServiceId, serviceIds, TVSchedule } from "./types";
 import React, { useState } from "react";
 
 const END_POINT = "https://api.nhk.or.jp/v2/pg/list";
@@ -104,7 +104,7 @@ function ProgramDetail({ program }: { program: Program }): React.JSX.Element {
           <Detail.Metadata.Separator />
           <Detail.Metadata.TagList title="Genres">
             {program.genres.map((genre) => {
-              return <Detail.Metadata.TagList.Item key={genre} text={genre} />;
+              return <Detail.Metadata.TagList.Item key={genre} text={genreLabels[genre]} />;
             })}
           </Detail.Metadata.TagList>
           <Detail.Metadata.Separator />
