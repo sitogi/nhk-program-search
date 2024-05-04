@@ -9,5 +9,5 @@ const values = getPreferenceValues<Preferences>();
 
 export const preferences = {
   apiKey: values.apiKey,
-  area: values.area
+  area: values.area,
 };

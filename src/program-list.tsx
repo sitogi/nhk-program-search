@@ -1,9 +1,9 @@
-import { preferences } from "./preferences";
-import { getFormattedDate } from "./utils";
 import { Action, ActionPanel, Detail, Icon, List } from "@raycast/api";
-import { genreLabels, Program, ServiceId, serviceIds, TVSchedule } from "./types";
-import React, { useState } from "react";
 import { useFetch } from "@raycast/utils";
+import React, { useState } from "react";
+import { preferences } from "./preferences";
+import { genreLabels, Program, ServiceId, serviceIds, TVSchedule } from "./types";
+import { getFormattedDate } from "./utils";
 
 const END_POINT = "https://api.nhk.or.jp/v2/pg/list";
 
