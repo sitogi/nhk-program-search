@@ -7,10 +7,6 @@ import { getFormattedDate } from "./utils";
 
 const END_POINT = "https://api.nhk.or.jp/v2/pg/list";
 
-function buildTitle(program: Program): string {
-  return `${getFormattedDate(new Date(program.start_time), "MM/DD HH:mm")}    ${program.title}`;
-}
-
 const serviceIdLogos = {
   g1: "https://www.nhk.or.jp/common/img/media/gtv-100x50.png",
   e1: "https://www.nhk.or.jp/common/img/media/etv-100x50.png",
@@ -50,7 +46,12 @@ export default function Command() {
               icon={{
                 source: Icon.Document,
               }}
-              title={buildTitle(p)}
+              title={p.title}
+              accessories={[
+                {
+                  text: `${getFormattedDate(new Date(p.start_time), "HH:mm")} ~ ${getFormattedDate(new Date(p.end_time), "HH:mm")}`,
+                },
+              ]}
               actions={
                 <ActionPanel title={p.title}>
                   <Action.Push title="Show Detail" target={<ProgramDetail program={p} />} />
