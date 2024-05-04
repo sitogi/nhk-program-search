@@ -86,6 +86,8 @@ function SearchBarDropdown({ onChange }: { onChange: (newValue: ServiceId) => vo
 }
 
 function ProgramDetail({ program }: { program: Program }): React.JSX.Element {
+  const cast = parseAct(program.act);
+
   return (
     <Detail
       markdown={buildMarkdown(program)}
@@ -96,25 +98,23 @@ function ProgramDetail({ program }: { program: Program }): React.JSX.Element {
             text={program.service.name}
             icon={`https:${program.service.logo_s.url}`}
           />
-          <Detail.Metadata.Separator />
           <Detail.Metadata.Label
             title="Airtime"
             text={`${getFormattedDate(new Date(program.start_time), "HH:mm")} - ${getFormattedDate(new Date(program.end_time), "HH:mm")}`}
           />
-          <Detail.Metadata.Separator />
           <Detail.Metadata.TagList title="Genres">
             {program.genres.map((genre) => {
               return <Detail.Metadata.TagList.Item key={genre} text={genreLabels[genre]} />;
             })}
           </Detail.Metadata.TagList>
           <Detail.Metadata.Separator />
-          {program.act.length > 0 && (
-            <Detail.Metadata.TagList title="Actors">
-              {program.act.split("，").map((act) => {
-                return <Detail.Metadata.TagList.Item key={act} text={act} />;
+          {Object.keys(cast).map((role) => (
+            <Detail.Metadata.TagList key={role} title={role}>
+              {cast[role].map((name) => {
+                return <Detail.Metadata.TagList.Item key={name} text={name} />;
               })}
             </Detail.Metadata.TagList>
-          )}
+          ))}
         </Detail.Metadata>
       }
     />
@@ -137,4 +137,32 @@ function buildMarkdown(program: Program): string {
   }
 
   return lines.join("\n");
+}
+
+type Cast = {
+  [role: string]: string[];
+};
+
+function parseAct(act: string): Cast {
+  const matches = act.matchAll(/【(.*?)】/g);
+  const roles = Array.from(matches, (match) => match[1]);
+
+  const result: Cast = {};
+
+  for (let i = 0; i < roles.length; i++) {
+    result[roles[i]] = [];
+
+    const startMarker = `【${roles[i]}】`;
+    const endMarker = i === roles.length - 1 ? "$" : `【${roles[i + 1]}】`;
+    const pattern = new RegExp(`${startMarker}(.*?)${endMarker}`);
+    const matches = act.match(pattern);
+    const extractedString = matches ? matches[1] : "";
+
+    extractedString
+      .split("，")
+      .filter((name) => name.length > 0)
+      .forEach((name) => result[roles[i]].push(name));
+  }
+
+  return result;
 }
