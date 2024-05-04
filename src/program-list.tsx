@@ -1,17 +1,11 @@
 import { preferences } from "./preferences";
 import { getFormattedDate } from "./utils";
-import fetch from "node-fetch";
-import useSWR from "swr";
 import { Action, ActionPanel, Detail, Icon, List } from "@raycast/api";
 import { genreLabels, Program, ServiceId, serviceIds, TVSchedule } from "./types";
 import React, { useState } from "react";
+import { useFetch } from "@raycast/utils";
 
 const END_POINT = "https://api.nhk.or.jp/v2/pg/list";
-
-const fetcher = async (url: string): Promise<TVSchedule> => {
-  const res = await fetch(url);
-  return (await res.json()) as TVSchedule;
-};
 
 function buildTitle(program: Program): string {
   return `${getFormattedDate(new Date(program.start_time), "MM/DD HH:mm")}    ${program.title}`;
@@ -37,12 +31,8 @@ const serviceIdLabels = {
 
 export default function Command() {
   const [serviceId, setServiceId] = useState<ServiceId>("g1");
-  const apiKey = preferences.apiKey;
-  const area = preferences.area;
-
-  const { data, error } = useSWR(
-    `${END_POINT}/${area}/tv/${getFormattedDate(new Date(), "YYYY-MM-DD")}.json?key=${apiKey}`,
-    (url) => fetcher(url),
+  const { isLoading, data, error } = useFetch<TVSchedule>(
+    `${END_POINT}/${preferences.area}/tv/${getFormattedDate(new Date(), "YYYY-MM-DD")}.json?key=${preferences.apiKey}`,
   );
 
   if (error !== undefined) {
@@ -50,7 +40,7 @@ export default function Command() {
   }
 
   return (
-    <List isLoading={data === undefined} searchBarAccessory={<SearchBarDropdown onChange={setServiceId} />}>
+    <List isLoading={isLoading} searchBarAccessory={<SearchBarDropdown onChange={setServiceId} />}>
       {data?.list[serviceId]
         ?.filter((p) => new Date(p.end_time) > new Date())
         .map((p) => {
