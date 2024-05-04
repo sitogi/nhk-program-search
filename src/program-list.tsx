@@ -51,22 +51,24 @@ export default function Command() {
 
   return (
     <List isLoading={data === undefined} searchBarAccessory={<SearchBarDropdown onChange={setServiceId} />}>
-      {data?.list[serviceId]?.map((p) => {
-        return (
-          <List.Item
-            key={p.id}
-            icon={{
-              source: Icon.Document,
-            }}
-            title={buildTitle(p)}
-            actions={
-              <ActionPanel title={p.title}>
-                <Action.Push title="Show Detail" target={<ProgramDetail program={p} />} />
-              </ActionPanel>
-            }
-          />
-        );
-      })}
+      {data?.list[serviceId]
+        ?.filter((p) => new Date(p.end_time) > new Date())
+        .map((p) => {
+          return (
+            <List.Item
+              key={p.id}
+              icon={{
+                source: Icon.Document,
+              }}
+              title={buildTitle(p)}
+              actions={
+                <ActionPanel title={p.title}>
+                  <Action.Push title="Show Detail" target={<ProgramDetail program={p} />} />
+                </ActionPanel>
+              }
+            />
+          );
+        })}
     </List>
   );
 }
