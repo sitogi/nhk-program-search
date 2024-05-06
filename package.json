@@ -250,6 +250,12 @@
       "title": "Program List",
       "description": "MHK Program List API Wrapper",
       "mode": "view"
+    },
+    {
+      "name": "program-genre",
+      "title": "Program Genre",
+      "description": "MHK Program Genre API Wrapper",
+      "mode": "view"
     }
   ],
   "dependencies": {
