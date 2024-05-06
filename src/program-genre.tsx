@@ -4,13 +4,12 @@ import React, { useState } from "react";
 import { ProgramDetail } from "./components/ProgramDetail";
 import { SearchBarDropdown } from "./components/ServiceSelectSearchBar";
 import { preferences } from "./preferences";
-import { genreLabels, genreMajorCategoryLabels, ServiceId, TVSchedule } from "./types";
+import { genreLabels, ServiceId, TVSchedule } from "./types";
 import { getFormattedDate } from "./utils";
 
 const END_POINT = "https://api.nhk.or.jp/v2/pg/list";
 
 export default function Command() {
-  const [selectedMajorCategories, setSelectedMajorCategories] = useState<string[]>([]);
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState<boolean>(false);
 
@@ -22,39 +21,20 @@ export default function Command() {
     <Form
       actions={
         <ActionPanel>
-          <Action.SubmitForm title="Search Programs" onSubmit={() => setSubmitted(true)} />
+          <Action.SubmitForm
+            title="Search Programs"
+            onSubmit={async (input) => {
+              setSelectedGenres(input.genres);
+              setSubmitted(true);
+            }}
+          />
         </ActionPanel>
       }
     >
-      <Form.Description
-        title="Import / Export"
-        text="Exporting will back-up your preferences, quicklinks, snippets, floating notes, script-command folder paths, aliases, hotkeys, favorites and other data."
-      />
-      <Form.TagPicker
-        id="majorCategories"
-        title="Genre Major Categories"
-        value={selectedMajorCategories}
-        onChange={(newValue) => {
-          setSelectedMajorCategories(newValue);
-          setSelectedGenres(selectedGenres.filter((genre) => newValue.includes(genre.substring(0, 2))));
-        }}
-      >
-        {Array.from(genreMajorCategoryLabels).map(([key, label]) => {
-          return <Form.TagPicker.Item key={key} value={key} title={label} />;
-        })}
-      </Form.TagPicker>
-      <Form.TagPicker
-        id="genres"
-        title="Genres"
-        value={selectedGenres}
-        onChange={(newValue) => setSelectedGenres(newValue)}
-      >
-        {Array.from(genreLabels).map(([key, label]) => {
-          if (selectedMajorCategories.includes(key.substring(0, 2))) {
-            return <Form.TagPicker.Item key={key} value={key} title={label} />;
-          }
-          return null;
-        })}
+      <Form.TagPicker id="genres" title="Genres" defaultValue={[]} storeValue>
+        {Array.from(genreLabels).map(([key, label]) => (
+          <Form.TagPicker.Item key={key} value={key} title={label} />
+        ))}
       </Form.TagPicker>
     </Form>
   );
