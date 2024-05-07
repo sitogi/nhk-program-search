@@ -79,6 +79,9 @@ function ProgramList({
               title={p.title}
               accessories={[
                 {
+                  text: `${getFormattedDate(new Date(p.start_time), "MM-DD")}`,
+                },
+                {
                   text: `${getFormattedDate(new Date(p.start_time), "HH:mm")} ~ ${getFormattedDate(new Date(p.end_time), "HH:mm")}`,
                 },
               ]}
