@@ -10,6 +10,49 @@
     "Media"
   ],
   "license": "MIT",
+  "dependencies": {
+    "@raycast/api": "^1.72.1",
+    "@raycast/utils": "^1.15.0",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^1.0.6",
+    "@types/node": "20.8.10",
+    "@types/react": "18.2.27",
+    "eslint": "^8.51.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
+  },
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "publish": "npx @raycast/api@latest publish"
+  },
+  "commands": [
+    {
+      "name": "program-list",
+      "title": "Program List",
+      "description": "MHK Program List API Wrapper",
+      "mode": "view"
+    },
+    {
+      "name": "program-genre",
+      "title": "Program Genre",
+      "description": "MHK Program Genre API Wrapper",
+      "mode": "view"
+    },
+    {
+      "name": "update-local-cache",
+      "title": "Update Local Cache",
+      "description": "Caches a week's worth of program schedule locally",
+      "mode": "no-view",
+      "interval": "1d"
+    }
+  ],
   "preferences": [
     {
       "name": "apiKey",
@@ -243,41 +286,5 @@
         }
       ]
     }
-  ],
-  "commands": [
-    {
-      "name": "program-list",
-      "title": "Program List",
-      "description": "MHK Program List API Wrapper",
-      "mode": "view"
-    },
-    {
-      "name": "program-genre",
-      "title": "Program Genre",
-      "description": "MHK Program Genre API Wrapper",
-      "mode": "view"
-    }
-  ],
-  "dependencies": {
-    "@raycast/api": "^1.72.1",
-    "@raycast/utils": "^1.15.0",
-    "node-fetch": "^3.3.2"
-  },
-  "devDependencies": {
-    "@raycast/eslint-config": "^1.0.6",
-    "@types/node": "20.8.10",
-    "@types/react": "18.2.27",
-    "eslint": "^8.51.0",
-    "eslint-import-resolver-typescript": "^3.6.1",
-    "eslint-plugin-import": "^2.29.1",
-    "prettier": "^3.0.3",
-    "typescript": "^5.2.2"
-  },
-  "scripts": {
-    "build": "ray build -e dist",
-    "dev": "ray develop",
-    "fix-lint": "ray lint --fix",
-    "lint": "ray lint",
-    "publish": "npx @raycast/api@latest publish"
-  }
+  ]
 }

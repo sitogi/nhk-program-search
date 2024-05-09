@@ -1,13 +1,9 @@
-import { Action, ActionPanel, Detail, Form, Icon, List } from "@raycast/api";
-import { useFetch } from "@raycast/utils";
-import React, { useState } from "react";
+import { Action, ActionPanel, Cache, Form, Icon, List } from "@raycast/api";
+import React, { useEffect, useState } from "react";
 import { ProgramDetail } from "./components/ProgramDetail";
 import { SearchBarDropdown } from "./components/ServiceSelectSearchBar";
-import { preferences } from "./preferences";
-import { genreLabels, ServiceId, TVSchedule } from "./types";
+import { genreLabels, Program, ServiceId } from "./types";
 import { getFormattedDate } from "./utils";
-
-const END_POINT = "https://api.nhk.or.jp/v2/pg/list";
 
 export default function Command() {
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
@@ -40,6 +36,8 @@ export default function Command() {
   );
 }
 
+const cache = new Cache();
+
 function ProgramList({
   displayGenres,
   handleOnBack,
@@ -48,13 +46,14 @@ function ProgramList({
   handleOnBack: () => void;
 }): React.JSX.Element {
   const [serviceId, setServiceId] = useState<ServiceId>("g1");
-  const { isLoading, data, error } = useFetch<TVSchedule>(
-    `${END_POINT}/${preferences.area}/tv/${getFormattedDate(new Date(), "YYYY-MM-DD")}.json?key=${preferences.apiKey}`,
-  );
+  const [programs, setPrograms] = useState<Program[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  if (error !== undefined) {
-    return <Detail markdown={`Sorry. An error occurred. \n>${error.message}`} />;
-  }
+  useEffect(() => {
+    setIsLoading(true);
+    setPrograms((JSON.parse(cache.get(serviceId) ?? "[]") as Program[]) ?? []);
+    setIsLoading(false);
+  }, [serviceId]);
 
   return (
     <List
@@ -66,7 +65,7 @@ function ProgramList({
         </ActionPanel>
       }
     >
-      {data?.list[serviceId]
+      {programs
         ?.filter((p) => p.genres.some((g) => displayGenres.includes(g)))
         ?.filter((p) => new Date(p.end_time) > new Date())
         .map((p) => {

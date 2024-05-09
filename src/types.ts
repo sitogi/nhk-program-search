@@ -44,7 +44,7 @@ export type Program = {
   genres: Genre[];
 };
 
-type ServicePrograms = {
+export type ServicePrograms = {
   [key in ServiceId]: Program[];
 };
 
