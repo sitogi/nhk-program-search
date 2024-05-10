@@ -233,3 +233,10 @@ export const serviceIdLabels = {
   s5: "ＮＨＫ ＢＳプレミアム４Ｋ",
   s6: "ＮＨＫ ＢＳ８Ｋ",
 } satisfies { [key in ServiceId]: string };
+
+export type ErrorResponseBody = {
+  error: {
+    code: number;
+    message: string;
+  };
+};
