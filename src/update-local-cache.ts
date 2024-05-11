@@ -2,6 +2,7 @@ import { Cache, showToast, Toast, updateCommandMetadata } from "@raycast/api";
 import fetch from "node-fetch";
 import { preferences } from "./preferences";
 import { ErrorResponseBody, Program, serviceIds, TVSchedule } from "./types";
+import { getFormattedDate } from "./utils";
 
 const END_POINT = "https://api.nhk.or.jp/v2/pg/list";
 
@@ -52,11 +53,9 @@ export default async function Command() {
 
     serviceIds.forEach((sid) => {
       const existed = JSON.parse(cache.get(sid) ?? "[]") as Program[];
-      console.log("existed length", existed.length);
       cache.set(sid, JSON.stringify([...existed, ...data.list[sid]]));
-      console.log(`set ${sid}`);
     });
   }
 
-  await updateCommandMetadata({ subtitle: `Updated At: ${new Date().toISOString().split("T")[0]}` });
+  await updateCommandMetadata({ subtitle: `Last Update: ${getFormattedDate(new Date(), "YYYY-MM-DD HH:mm")}` });
 }
