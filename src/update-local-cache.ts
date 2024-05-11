@@ -9,16 +9,12 @@ const END_POINT = "https://api.nhk.or.jp/v2/pg/list";
 const cache = new Cache();
 
 export default async function Command() {
-  // キャッシュのリセット
-
   // 現在の日付 ~ １週間分の日付の文字列 YYYY-MM-DD の配列を作成する
-  const dates = Array.from({ length: 7 }, (_, i) => {
-    // JST で取得
+  const weekDates = Array.from({ length: 7 }, (_, i) => {
     const jstDate = new Date(new Date().getTime() + 9 * 60 * 60 * 1000);
     jstDate.setDate(jstDate.getDate() + i);
-    return jstDate.toISOString().split("T")[0];
+    return getFormattedDate(jstDate, "YYYY-MM-DD");
   });
-  const { area, apiKey } = preferences;
 
   // prev cache data
   const prevCache: { [key: string]: Program[] } = {};
@@ -30,8 +26,8 @@ export default async function Command() {
 
   serviceIds.forEach(cache.remove);
 
-  for (const date of dates) {
-    const response = await fetch(`${END_POINT}/${area}/tv/${date}.json?key=${apiKey}`);
+  for (const date of weekDates) {
+    const response = await fetch(`${END_POINT}/${preferences.area}/tv/${date}.json?key=${preferences.apiKey}`);
 
     if (!response.ok) {
       const errorResponse = (await response.json()) as ErrorResponseBody;
