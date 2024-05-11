@@ -36,13 +36,19 @@
     {
       "name": "program-list",
       "title": "Program List",
-      "description": "MHK Program List API Wrapper",
+      "description": "Display a program guide",
       "mode": "view"
     },
     {
       "name": "program-genre",
       "title": "Program Genre",
-      "description": "MHK Program Genre API Wrapper",
+      "description": "Display a program guide filtered by specific genres",
+      "mode": "view"
+    },
+    {
+      "name": "program-keyword",
+      "title": "Program Keyword",
+      "description": "Display a program guide filtered by specific keywords",
       "mode": "view"
     },
     {
