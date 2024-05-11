@@ -35,8 +35,10 @@ async function storeWeeklyProgramsCache(): Promise<void> {
   const weekDates = Array.from({ length: 7 }, (_, i) => {
     const jstDate = new Date(new Date().getTime() + 9 * 60 * 60 * 1000);
     jstDate.setDate(jstDate.getDate() + i);
-    return getFormattedDate(jstDate, "YYYY-MM-DD");
+    return jstDate.toISOString().split("T")[0];
   });
+
+  console.log(weekDates);
 
   for (const date of weekDates) {
     const response = await fetch(`${END_POINT}/${preferences.area}/tv/${date}.json?key=${preferences.apiKey}`);
