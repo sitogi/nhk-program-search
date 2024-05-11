@@ -32,7 +32,7 @@ export default async function Command() {
 }
 
 async function storeWeeklyProgramsCache(): Promise<void> {
-  const weekDates = Array.from({ length: 8 }, (_, i) => {
+  const weekDates = Array.from({ length: 7 }, (_, i) => {
     const jstDate = new Date(new Date().getTime() + 9 * 60 * 60 * 1000);
     jstDate.setDate(jstDate.getDate() + i);
     return jstDate.toISOString().split("T")[0];
