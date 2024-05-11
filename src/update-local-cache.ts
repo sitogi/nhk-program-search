@@ -13,6 +13,10 @@ export default async function Command() {
   try {
     await storeWeeklyProgramsCache();
     await updateCommandMetadata({ subtitle: `Last Update: ${getFormattedDate(new Date(), "YYYY-MM-DD HH:mm")}` });
+    await showToast({
+      style: Toast.Style.Success,
+      title: "Successfully fetched data",
+    });
   } catch (error) {
     await showToast({
       style: Toast.Style.Failure,
@@ -52,7 +56,6 @@ async function storeWeeklyProgramsCache(): Promise<void> {
 }
 
 function getPrevCacheAndClear() {
-  // prev cache data
   const prevCache: { [key: string]: Program[] } = {};
   serviceIds.forEach((sid) => {
     const data = JSON.parse(cache.get(sid) ?? "[]") as Program[];
