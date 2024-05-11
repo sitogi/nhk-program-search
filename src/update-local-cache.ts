@@ -9,10 +9,6 @@ const cache = new Cache();
 
 export default async function Command() {
   // キャッシュのリセット
-  // TODO: ここではリセットではなく退避にしておいて、更新失敗したら復元してあげるのが優しいかも
-  serviceIds.forEach((sid) => {
-    cache.remove(sid);
-  });
 
   // 現在の日付 ~ １週間分の日付の文字列 YYYY-MM-DD の配列を作成する
   const dates = Array.from({ length: 7 }, (_, i) => {
@@ -37,6 +33,8 @@ export default async function Command() {
     }
 
     const data = (await response.json()) as TVSchedule;
+
+    serviceIds.forEach(cache.remove);
 
     serviceIds.forEach((sid) => {
       const existed = JSON.parse(cache.get(sid) ?? "[]") as Program[];
