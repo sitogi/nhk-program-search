@@ -1,22 +1,13 @@
-import { Cache, updateCommandMetadata } from "@raycast/api";
+import { Cache, showToast, Toast, updateCommandMetadata } from "@raycast/api";
 import fetch from "node-fetch";
 import { preferences } from "./preferences";
 import { ErrorResponseBody, Program, serviceIds, TVSchedule } from "./types";
 
 const END_POINT = "https://api.nhk.or.jp/v2/pg/list";
 
-async function fetchUnreadNotificationCount() {
-  console.log("fetched");
-  return Math.random() * 10;
-}
-
 const cache = new Cache();
 
 export default async function Command() {
-  // TODO: last updated とかに変えるのと、場所移動 (成功したら更新する)
-  const count = await fetchUnreadNotificationCount();
-  await updateCommandMetadata({ subtitle: `Unread Notifications: ${count}` });
-
   // キャッシュのリセット
   // TODO: ここではリセットではなく退避にしておいて、更新失敗したら復元してあげるのが優しいかも
   serviceIds.forEach((sid) => {
@@ -33,17 +24,18 @@ export default async function Command() {
   const { area, apiKey } = preferences;
 
   for (const date of dates) {
-    // TODO: エラーハンドリングする
     const response = await fetch(`${END_POINT}/${area}/tv/${date}.json?key=${apiKey}`);
-    if (!response.ok) {
-      console.error("failed to fetch");
-      const errorResponse = (await response.json()) as ErrorResponseBody;
-      console.error(errorResponse);
-      // 08:43:50.013 { error: { code: 1, message: 'Invalid parameters' } }
-      // という型式できていたので、このメッセージをトースト？に出してあげる
 
+    if (!response.ok) {
+      const errorResponse = (await response.json()) as ErrorResponseBody;
+      await showToast({
+        style: Toast.Style.Failure,
+        title: "Failed to fetch data",
+        message: errorResponse.error.message,
+      });
       return;
     }
+
     const data = (await response.json()) as TVSchedule;
 
     serviceIds.forEach((sid) => {
@@ -54,5 +46,5 @@ export default async function Command() {
     });
   }
 
-  console.log("finish");
+  await updateCommandMetadata({ subtitle: `Updated At: ${new Date().toISOString().split("T")[0]}` });
 }
