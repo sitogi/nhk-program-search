@@ -19,6 +19,16 @@ export default async function Command() {
   });
   const { area, apiKey } = preferences;
 
+  // prev cache data
+  const prevCache: { [key: string]: Program[] } = {};
+  serviceIds.forEach((sid) => {
+    const data = JSON.parse(cache.get(sid) ?? "[]") as Program[];
+    prevCache[sid] = data;
+    return data;
+  });
+
+  serviceIds.forEach(cache.remove);
+
   for (const date of dates) {
     const response = await fetch(`${END_POINT}/${area}/tv/${date}.json?key=${apiKey}`);
 
@@ -29,12 +39,16 @@ export default async function Command() {
         title: "Failed to fetch data",
         message: errorResponse.error.message,
       });
+
+      // restore prev data
+      serviceIds.forEach((sid) => {
+        cache.set(sid, JSON.stringify(prevCache[sid]));
+      });
+
       return;
     }
 
     const data = (await response.json()) as TVSchedule;
-
-    serviceIds.forEach(cache.remove);
 
     serviceIds.forEach((sid) => {
       const existed = JSON.parse(cache.get(sid) ?? "[]") as Program[];
