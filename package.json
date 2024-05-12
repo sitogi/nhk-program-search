@@ -1,11 +1,10 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "nhk-program-search",
-  "title": "NHK",
-  "description": "NHK Program Search",
+  "title": "NHK Program Search",
+  "description": "Search NHK program guide by NHK API",
   "icon": "n-logo.png",
   "author": "sitogi",
-  "owner": "t-motors",
   "categories": [
     "Media"
   ],
