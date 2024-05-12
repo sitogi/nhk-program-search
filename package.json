@@ -6,7 +6,8 @@
   "icon": "n-logo.png",
   "author": "sitogi",
   "categories": [
-    "Media"
+    "Media",
+    "Other"
   ],
   "license": "MIT",
   "dependencies": {
