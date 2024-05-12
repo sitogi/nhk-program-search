@@ -33,21 +33,21 @@
   },
   "commands": [
     {
-      "name": "program-list",
-      "title": "Program List",
+      "name": "list-program",
+      "title": "List Program",
       "description": "Display a program guide",
       "mode": "view"
     },
     {
-      "name": "program-genre",
-      "title": "Program Genre",
-      "description": "Display a program guide filtered by specific genres",
+      "name": "search-program-by-genre",
+      "title": "Search Program by Genne",
+      "description": "Display a program guide filtered by specific genre",
       "mode": "view"
     },
     {
-      "name": "program-keyword",
-      "title": "Program Keyword",
-      "description": "Display a program guide filtered by specific keywords",
+      "name": "search-program-by-keyword",
+      "title": "Search Program by Keyword",
+      "description": "Display a program guide filtered by specific keyword",
       "mode": "view"
     },
     {
